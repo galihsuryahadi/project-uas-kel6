@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GOWES SHOP - Produk</title>
+  <style>
+    :root{
+      --bg:#060b1a;
+      --bg2:#0b1430;
+      --text:#eaf0ff;
+      --muted:#b9c7ff;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --radius:14px  
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+
+   
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+
+      
+      background:
+        linear-gradient(
+          120deg,
+          rgba(5,10,24,0.92),
+          rgba(5,10,24,0.70) 45%,
+          rgba(5,10,24,0.92)
+        ),
+        url("assets/images/bg-sepeda.jpg") center/cover no-repeat fixed;
+
+      
+      background-color: var(--bg);
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,92%);margin:0 auto}
+
+    .header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      background:rgba(6,11,26,.75);
+      border-bottom:1px solid var(--line)
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
+    .brand{display:flex;flex-direction:column;gap:2px}
+    .brand .title{font-size:26px;font-weight:800}
+    .brand .subtitle{font-size:13px;color:var(--muted)}
+    .badge{border:1px solid rgba(110,168,255,.45);background:rgba(110,168,255,.14);padding:7px 12px;border-radius:999px;font-size:13px;display:flex;gap:10px;align-items:center}
+    .badge button{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);padding:6px 10px;border-radius:999px;cursor:pointer;font-size:12px}
+
+    .nav{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:0 0 16px}
+    .nav a{font-size:13px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);transition:.2s}
+    .nav a:hover{border-color:rgba(110,168,255,.35);color:var(--text)}
+    .nav a.active{background:rgba(110,168,255,.18);border-color:rgba(110,168,255,.55);color:var(--text)}
+
+    .main{padding:26px 0 60px}
+
+    .card{
+      background:rgba(13,26,58,.62);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow)
+    }
+    .section{padding:18px}
+    .section-title{font-size:22px;font-weight:800;margin:0 0 12px}
+    .lead{color:var(--muted);margin:0 0 16px;line-height:1.6}
+    .hr{height:1px;background:var(--line);margin:16px 0}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:10px 14px;border:1px solid rgba(110,168,255,.40);background:rgba(110,168,255,.12);color:var(--text);cursor:pointer;font-weight:600;font-size:13px}
+    .btn.secondary{background:rgba(255,255,255,.06);border-color:var(--line);color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:600px){.grid{grid-template-columns:1fr}}
+
+    .item{padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+    .item h3{margin:0 0 8px;font-size:16px}
+    .item p{margin:0 0 10px;color:var(--muted);font-size:13px;line-height:1.5}
+    .meta{display:flex;justify-content:space-between;gap:10px;align-items:center}
+    .price{font-weight:800}
+    .footer{border-top:1px solid var(--line);padding:18px 0;color:var(--muted);font-size:12px}
+    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(10,16,40,.9);color:#eaf0ff;z-index:9999;font-size:13px}
+
+    /* TAMBAHAN: gambar produk */
+    .item img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:10px;
+      margin-bottom:10px;
+      border:1px solid var(--line);
+    }
+  </style>
+</head>
+
+<body>
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="title">🚴‍♂️ GOWES SHOP</div>
+        <div class="subtitle">Pilih sepeda sesuai kebutuhanmu</div>
+      </div>
+      <div class="badge">
+        <span id="cartBadge">Keranjang: 0</span>
+        <button onclick="location.href='pembelian.html'">Checkout</button>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="Etalase.html">Etalase</a>
+      <a href="produk.html">Produk</a>
+      <a href="aksesoris.html">Aksesoris</a>
+      <a href="kupon.html">Kupon</a>
+      <a href="paylater.html">PayLater</a>
+      <a href="pembelian.html">Pembelian</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="ulasan.html">Ulasan</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    <section class="card section">
+      <h1 class="section-title">Produk Sepeda</h1>
+      <p class="lead">Klik <b>Tambah</b> untuk memasukkan ke keranjang.</p>
+      <div class="hr"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+    <div class="footer">© 2026 Gowes Shop</div>
+  </div>
+</main>
+
+<script>
+  const LS_CART="toko_sepeda_cart";
+  const produk=[
+    {id:"P-MTB-01", name:"MTB Trail 27.5", category:"Sepeda MTB", price:3250000, desc:"Suspensi depan, cocok untuk jalur off-road dan tanjakan.", img:"assets/images/MTB.jpg"},
+    {id:"P-RD-01",  name:"Road Bike Aero 700C", category:"Sepeda Road", price:5450000, desc:"Ringan dan kencang untuk latihan jarak jauh di jalan raya.", img:"assets/images/road.jpeg"},
+    {id:"P-FLD-01", name:"Sepeda Lipat Urban 20\"", category:"Sepeda Lipat", price:2750000, desc:"Praktis untuk commuter, mudah dilipat dan dibawa.", img:"assets/images/urban20.jpeg"},
+    {id:"P-CTY-01", name:"City Bike Comfort", category:"Sepeda City", price:2100000, desc:"Posisi duduk nyaman, cocok untuk aktivitas harian.", img:"assets/images/citybike.jpeg"},
+    {id:"P-GRV-01", name:"Gravel Adventure", category:"Sepeda Gravel", price:6200000, desc:"Serbaguna untuk aspal dan jalanan berbatu ringan.", img:"assets/images/Gravel.jpeg"},
+    {id:"P-KID-01", name:"Sepeda Anak 16\"", category:"Sepeda Anak", price:1250000, desc:"Stabil dan aman untuk belajar gowes.", img:"assets/images/anak.jpeg"}
+    
+  ];
+  function rupiah(n){return "Rp " + (n||0).toLocaleString("id-ID")}
+  function getCart(){try{return JSON.parse(localStorage.getItem(LS_CART))||[]}catch{return[]}}
+  function setCart(cart){localStorage.setItem(LS_CART, JSON.stringify(cart)); updateBadge();}
+  function cartCount(){return getCart().reduce((a,x)=>a+(x.qty||0),0)}
+  function updateBadge(){const el=document.getElementById("cartBadge"); if(el) el.textContent="Keranjang: "+cartCount();}
+  function toast(msg){
+    const t=document.createElement("div"); t.className="toast"; t.textContent=msg;
+    document.body.appendChild(t); setTimeout(()=>t.remove(), 1400);
+  }
+  function addToCart(item){
+    const cart=getCart();
+    const idx=cart.findIndex(x=>x.id===item.id);
+    if(idx>=0) cart[idx].qty+=1;
+    else cart.push({...item, qty:1});
+    setCart(cart); toast("Ditambah: "+item.name);
+  }
+  function setActiveNav(){
+    const path=(location.pathname.split("/").pop()||"produk.html").toLowerCase();
+    document.querySelectorAll(".nav a").forEach(a=>{
+      a.classList.toggle("active",(a.getAttribute("href")||"").toLowerCase()===path);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    setActiveNav(); updateBadge();
+    const grid=document.getElementById("grid");
+    grid.innerHTML = produk.map(p=>`
+      <div class="item">
+        <img src="${p.img}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="meta">
+          <div>
+            <div style="color:var(--muted);font-size:12px">${p.category}</div>
+            <div class="price">${rupiah(p.price)}</div>
+          </div>
+          <button class="btn" data-add="${p.id}">Tambah</button>
+        </div>
+      </div>
+    `).join("");
+    grid.querySelectorAll("[data-add]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const id=btn.getAttribute("data-add");
+        addToCart(produk.find(x=>x.id===id));
+      });
+    });
+  });
+</script>
+</body>
+</html>

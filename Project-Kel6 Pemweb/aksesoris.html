@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>GOWES SHOP - Aksesoris</title>
+
+<style>
+:root{
+  --bg:#060b1a;--bg2:#0b1430;--text:#eaf0ff;--muted:#b9c7ff;
+  --line:rgba(255,255,255,.08);--shadow:0 12px 40px rgba(0,0,0,.35);--radius:14px
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    linear-gradient(120deg,rgba(5,10,24,.92),rgba(5,10,24,.70) 45%,rgba(5,10,24,.92)),
+    url("assets/images/bg-sepeda.jpg") center/cover no-repeat fixed;
+}
+
+a{color:inherit;text-decoration:none}
+.container{width:min(1100px,92%);margin:0 auto}
+
+.header{
+  position:sticky;top:0;z-index:20;
+  backdrop-filter:blur(10px);
+  background:rgba(6,11,26,.75);
+  border-bottom:1px solid var(--line)
+}
+.header-inner{display:flex;justify-content:space-between;align-items:center;padding:18px 0;gap:16px}
+
+.brand .title{font-size:26px;font-weight:800}
+.brand .subtitle{font-size:13px;color:var(--muted)}
+
+.badge{
+  display:flex;gap:10px;align-items:center;
+  border:1px solid rgba(110,168,255,.45);
+  background:rgba(110,168,255,.14);
+  padding:7px 12px;border-radius:999px;font-size:13px
+}
+.badge button{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  padding:6px 10px;border-radius:999px;
+  cursor:pointer;font-size:12px
+}
+
+.nav{display:flex;gap:10px;padding-bottom:16px;flex-wrap:wrap}
+.nav a{
+  font-size:13px;padding:8px 12px;border:1px solid var(--line);
+  border-radius:999px;color:var(--muted)
+}
+.nav a.active{
+  background:rgba(110,168,255,.18);
+  border-color:rgba(110,168,255,.55);
+  color:var(--text)
+}
+
+.main{padding:26px 0 60px}
+.card{
+  background:rgba(13,26,58,.62);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow)
+}
+.section{padding:18px}
+.section-title{font-size:22px;font-weight:800;margin:0 0 12px}
+.lead{color:var(--muted);line-height:1.6}
+.hr{height:1px;background:var(--line);margin:16px 0}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px
+}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+
+.item{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.03)
+}
+.thumb{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid var(--line);
+  margin-bottom:10px;
+}
+.item h3{margin:0 0 6px;font-size:16px}
+.item p{margin:0 0 10px;color:var(--muted);font-size:13px}
+.meta{display:flex;justify-content:space-between;align-items:center}
+.price{font-weight:800}
+
+.btn{
+  padding:10px 14px;border-radius:10px;
+  border:1px solid rgba(110,168,255,.40);
+  background:rgba(110,168,255,.12);
+  color:var(--text);cursor:pointer;font-weight:600;font-size:13px
+}
+
+.footer{
+  border-top:1px solid var(--line);
+  padding:18px 0;color:var(--muted);font-size:12px
+}
+.toast{
+  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+  padding:10px 14px;border-radius:999px;
+  background:rgba(10,16,40,.9);
+  border:1px solid rgba(255,255,255,.1);
+  z-index:9999;font-size:13px
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="title">🚴‍♂️ GOWES SHOP</div>
+        <div class="subtitle">Lengkapi perlengkapan gowesmu</div>
+      </div>
+      <div class="badge">
+        <span id="cartBadge">Keranjang: 0</span>
+        <button onclick="location.href='pembelian.html'">Checkout</button>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="Etalase.html">Etalase</a>
+      <a href="produk.html">Produk</a>
+      <a href="aksesoris.html" class="active">Aksesoris</a>
+      <a href="kupon.html">Kupon</a>
+      <a href="paylater.html">PayLater</a>
+      <a href="pembelian.html">Pembelian</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="ulasan.html">Ulasan</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    <section class="card section">
+      <h1 class="section-title">Aksesoris Sepeda</h1>
+      <p class="lead">Klik <b>Tambah</b> untuk memasukkan aksesoris ke keranjang.</p>
+      <div class="hr"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+    <div class="footer">© 2026 Gowes Shop</div>
+  </div>
+</main>
+
+<script>
+const LS_CART="toko_sepeda_cart";
+
+const aksesoris=[
+  {id:"A-HELM-01",name:"Helm Sepeda",category:"Helm",price:350000,desc:"Helm ringan dengan ventilasi.",img:"assets/images/helm-sepeda.jpeg"},
+  {id:"A-LAMP-01",name:"Lampu Depan & Belakang",category:"Lampu",price:180000,desc:"Mode terang & hemat.",img:"assets/images/lampu-set.jpeg"},
+  {id:"A-LOCK-01",name:"Kunci U-Lock",category:"Keamanan",price:220000,desc:"Kunci baja anti maling.",img:"assets/images/kunci-sepeda.jpeg"},
+  {id:"A-BOTL-01",name:"Botol Minum + Holder",category:"Hidrasi",price:95000,desc:"Praktis & ringan.",img:"assets/images/botol-minum+holder.jpeg"},
+  {id:"A-PUMP-01",name:"Pompa Mini",category:"Perawatan",price:120000,desc:"Cocok Presta & Schrader.",img:"assets/images/pompa-mini.jpeg"},
+  {id:"A-BAG-01",name:"Saddle Bag",category:"Penyimpanan",price:140000,desc:"Untuk tools & ban.",img:"assets/images/soddle-bag.jpeg"}
+];
+
+function rupiah(n){return "Rp "+n.toLocaleString("id-ID")}
+function getCart(){return JSON.parse(localStorage.getItem(LS_CART)||"[]")}
+function setCart(c){localStorage.setItem(LS_CART,JSON.stringify(c));updateBadge()}
+function cartCount(){return getCart().reduce((a,x)=>a+x.qty,0)}
+function updateBadge(){document.getElementById("cartBadge").textContent="Keranjang: "+cartCount()}
+
+function toast(msg){
+  const t=document.createElement("div");
+  t.className="toast";t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),1400);
+}
+
+function addToCart(item){
+  const cart=getCart();
+  const i=cart.findIndex(x=>x.id===item.id);
+  if(i>=0) cart[i].qty++;
+  else cart.push({...item,qty:1});
+  setCart(cart);
+  toast("Ditambah: "+item.name);
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  updateBadge();
+  const grid=document.getElementById("grid");
+
+  grid.innerHTML=aksesoris.map(p=>`
+    <div class="item">
+      <img class="thumb" src="${p.img}" alt="${p.name}"
+        onerror="this.src='assets/images/placeholder.jpg'">
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      <div class="meta">
+        <div>
+          <div style="color:var(--muted);font-size:12px">${p.category}</div>
+          <div class="price">${rupiah(p.price)}</div>
+        </div>
+        <button class="btn" data-id="${p.id}">Tambah</button>
+      </div>
+    </div>
+  `).join("");
+
+  grid.querySelectorAll("button").forEach(b=>{
+    b.onclick=()=>addToCart(aksesoris.find(x=>x.id===b.dataset.id));
+  });
+});
+</script>
+
+</body>
+</html>

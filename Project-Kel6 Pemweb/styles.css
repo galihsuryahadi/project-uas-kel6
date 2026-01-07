@@ -1,0 +1,111 @@
+/* ===== SLIDER ETALASE (TAMBAHAN) ===== */
+.slider{
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  background:rgba(13,26,58,.40);
+  margin-bottom:16px;
+}
+
+.slides{
+  display:flex;
+  transition:transform .5s ease;
+  will-change:transform;
+}
+
+.slide{
+  position:relative;                 /* penting biar ::before nempel di slide */
+  min-width:100%;
+  height:320px;                      /* sedikit lebih enak dari 300 */
+  display:flex;
+  align-items:flex-end;
+  padding:18px;
+
+  background-size:contain;           /* biar gambar UTUH, tidak kepotong */
+  background-repeat:no-repeat;       /* jangan tile */
+  background-position:center center; /* center rapi */
+}
+
+.slide::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+  pointer-events:none;
+}
+
+.slide-inner{
+  position:relative;
+  max-width:720px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(6,11,26,.65);
+  backdrop-filter:blur(10px);
+  padding:12px 14px;
+}
+
+.slide-inner h3{
+  margin:0 0 4px;
+  font-size:18px;
+  font-weight:800;
+}
+
+.slide-inner p{
+  margin:0;
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.45;
+}
+
+.slider-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(0,0,0,.35);
+  color:#fff;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  z-index:2;
+}
+
+.slider-btn:hover{
+  background:rgba(0,0,0,.50);
+}
+
+.slider-btn.prev{left:10px}
+.slider-btn.next{right:10px}
+
+/* dots */
+.dots{
+  position:absolute;
+  left:50%;
+  bottom:10px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+  z-index:2;
+}
+.dot{
+  width:9px;
+  height:9px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.10);
+  cursor:pointer;
+}
+.dot.active{
+  background:rgba(110,168,255,.55);
+  border-color:rgba(110,168,255,.75);
+}
+
+@media (max-width:600px){
+  .slide{height:220px; padding:14px;}
+  .slide-inner h3{font-size:16px}
+}

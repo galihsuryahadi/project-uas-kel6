@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GOWES SHOP - Home</title>
+
+  <style>
+    :root{
+      --text:#eaf0ff;--muted:#b9c7ff;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --radius:14px;
+      --glass: rgba(6,11,26,.65);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      position:relative;
+      overflow-x:hidden;
+      background: transparent;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      background:
+        linear-gradient(rgba(6,11,26,.35), rgba(6,11,26,.70)),
+        url("/assets/images/bg-sepeda.jpg")
+        center/cover no-repeat;
+      transform: translateZ(0);
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.06), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(110,168,255,.08), transparent 45%);
+      pointer-events:none;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,92%);margin:0 auto}
+
+    
+    .header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(10px);
+      background:var(--glass);
+      border-bottom:1px solid var(--line);
+    }
+
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 0;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:220px;
+      flex:1;
+    }
+
+    .brand .title{font-size:26px;font-weight:800;line-height:1.1}
+    .brand .subtitle{font-size:13px;color:var(--muted);line-height:1.35}
+
+    .badge{
+      border:1px solid rgba(110,168,255,.45);
+      background:rgba(110,168,255,.14);
+      padding:7px 12px;border-radius:999px;
+      font-size:13px;display:flex;gap:10px;align-items:center;
+      flex:0 0 auto;
+    }
+
+    .badge button{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:6px 10px;border-radius:999px;
+      cursor:pointer;font-size:12px
+    }
+
+   
+    .nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      padding:0 0 16px;
+    }
+
+    .nav a{
+      font-size:13px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--muted);
+      transition:.2s;
+      white-space:nowrap;
+    }
+
+    .nav a:hover{
+      border-color:rgba(110,168,255,.35);
+      color:var(--text)
+    }
+
+    .nav a.active{
+      background:rgba(110,168,255,.18);
+      border-color:rgba(110,168,255,.55);
+      color:var(--text)
+    }
+
+    
+    .menu-btn{
+      display:none;
+      align-items:center;
+      gap:10px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .menu-icon{
+      width:18px;height:12px;
+      display:inline-flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .menu-icon span{
+      display:block;
+      height:2px;
+      background:rgba(255,255,255,.85);
+      border-radius:999px;
+      transition:.2s;
+    }
+
+    
+    .menu-btn[aria-expanded="true"] .menu-icon span:nth-child(1){
+      transform:translateY(5px) rotate(45deg);
+    }
+    .menu-btn[aria-expanded="true"] .menu-icon span:nth-child(2){
+      opacity:0;
+    }
+    .menu-btn[aria-expanded="true"] .menu-icon span:nth-child(3){
+      transform:translateY(-5px) rotate(-45deg);
+    }
+
+    
+    .nav-mobile{
+      display:none;
+      padding:0 0 16px;
+      position:relative;
+    }
+
+    .nav-panel{
+      display:none;
+      margin-top:10px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(6,11,26,.75);
+      backdrop-filter:blur(10px);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .nav-panel a{
+      display:block;
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .nav-panel a:last-child{border-bottom:none}
+    .nav-panel a:hover{
+      background:rgba(110,168,255,.10);
+      color:var(--text);
+    }
+    .nav-panel a.active{
+      background:rgba(110,168,255,.18);
+      color:var(--text);
+    }
+
+    
+    .overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:40;
+      background:rgba(0,0,0,.35);
+    }
+    .overlay.show{display:block}
+
+    
+    .main{padding:26px 0 60px}
+
+    .card{
+      background:rgba(13,26,58,.55);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(8px);
+    }
+
+    .section{padding:18px}
+    .section-title{font-size:22px;font-weight:800;margin:0 0 12px}
+    .lead{color:var(--muted);margin:0 0 16px;line-height:1.6}
+    .hr{height:1px;background:var(--line);margin:16px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:14px
+    }
+    @media(max-width:992px){
+      .grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    }
+    @media(max-width:700px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .box{
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(255,255,255,.03)
+    }
+    .box h3{margin:0 0 6px;font-size:15px}
+    .box p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6
+    }
+
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      border-radius:10px;padding:10px 14px;
+      border:1px solid rgba(110,168,255,.40);
+      background:rgba(110,168,255,.12);
+      color:var(--text);cursor:pointer;
+      font-weight:700;font-size:13px
+    }
+    .btn.secondary{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line);
+      color:var(--muted)
+    }
+
+    .footer{
+      border-top:1px solid var(--line);
+      padding:18px 0;color:var(--muted);
+      font-size:12px
+    }
+
+    
+    @media (max-width:600px){
+      .main{padding:18px 0 50px}
+      .section{padding:16px}
+
+      .header-inner{
+        padding:14px 0;
+      }
+
+      .brand{
+        min-width:0;
+        text-align:center;
+        align-items:center;
+      }
+      .brand .title{font-size:22px}
+
+      .badge{
+        width:100%;
+        justify-content:center;
+      }
+
+      
+      .nav{display:none}
+      .nav-mobile{display:block}
+
+      .menu-btn{display:inline-flex; width:100%; justify-content:center}
+
+      
+      .row{gap:8px}
+      .btn{width:100%}
+
+      body::before{
+        background-attachment: scroll;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- overlay untuk klik luar -->
+  <div class="overlay" id="overlay"></div>
+
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="title">🚴‍♂️ GOWES SHOP</div>
+          <div class="subtitle">Temukan sepeda & aksesoris terbaik untuk kebutuhanmu</div>
+        </div>
+
+        <div class="badge">
+          <span id="cartBadge">Keranjang: 0</span>
+          <button onclick="location.href='pembelian.html'">Checkout</button>
+        </div>
+      </div>
+
+      <!-- NAV DESKTOP -->
+      <nav class="nav" aria-label="Navigasi utama">
+        <a href="index.html">Home</a>
+        <a href="Etalase.html">Etalase</a>
+        <a href="produk.html">Produk</a>
+        <a href="aksesoris.html">Aksesoris</a>
+        <a href="kupon.html">Kupon</a>
+        <a href="paylater.html">PayLater</a>
+        <a href="pembelian.html">Pembelian</a>
+        <a href="riwayat.html">Riwayat</a>
+        <a href="ulasan.html">Ulasan</a>
+        <a href="kontak.html">Kontak</a>
+      </nav>
+
+      <!-- NAV MOBILE (Hamburger) -->
+      <div class="nav-mobile">
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navPanel">
+          <span class="menu-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          Menu
+        </button>
+
+        <div class="nav-panel" id="navPanel" role="menu" aria-label="Menu navigasi">
+          <a href="index.html" role="menuitem">Home</a>
+          <a href="Etalase.html" role="menuitem">Etalase</a>
+          <a href="produk.html" role="menuitem">Produk</a>
+          <a href="aksesoris.html" role="menuitem">Aksesoris</a>
+          <a href="kupon.html" role="menuitem">Kupon</a>
+          <a href="paylater.html" role="menuitem">PayLater</a>
+          <a href="pembelian.html" role="menuitem">Pembelian</a>
+          <a href="riwayat.html" role="menuitem">Riwayat</a>
+          <a href="ulasan.html" role="menuitem">Ulasan</a>
+          <a href="kontak.html" role="menuitem">Kontak</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <section class="card section">
+        <h1 class="section-title">Home</h1>
+        <p class="lead">
+          Selamat datang! Mulai belanja dari menu <b>Produk</b> atau <b>Aksesoris</b>.
+          Kamu juga bisa cek <b>PayLater</b> dan lihat <b>Riwayat</b> pesanan.
+        </p>
+
+        <div class="hr"></div>
+
+        <div class="grid">
+          <div class="box">
+            <h3>🛒 Belanja Produk</h3>
+            <p>Lihat koleksi sepeda dan tambahkan ke keranjang.</p>
+            <div class="row">
+              <a class="btn" href="produk.html">Buka Produk</a>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>🧩 Aksesoris</h3>
+            <p>Helm, lampu, pompa, kunci, dan aksesoris lainnya.</p>
+            <div class="row">
+              <a class="btn" href="aksesoris.html">Buka Aksesoris</a>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>🧾 Checkout & Riwayat</h3>
+            <p>Checkout di Pembelian dan lihat semua pesanan.</p>
+            <div class="row">
+              <a class="btn secondary" href="pembelian.html">Ke Pembelian</a>
+              <a class="btn secondary" href="riwayat.html">Ke Riwayat</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">© 2026 Gowes Shop</div>
+    </div>
+  </main>
+
+  <script>
+    const LS_CART="toko_sepeda_cart";
+
+    function getCart(){
+      try{return JSON.parse(localStorage.getItem(LS_CART))||[]}
+      catch{return[]}
+    }
+    function cartCount(){
+      return getCart().reduce((a,x)=>a+(x.qty||0),0)
+    }
+    function updateBadge(){
+      const el=document.getElementById("cartBadge");
+      if(el) el.textContent="Keranjang: "+cartCount();
+    }
+
+    function setActiveNav(){
+      const path=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+      document.querySelectorAll(".nav a, .nav-panel a").forEach(a=>{
+        a.classList.toggle("active",(a.getAttribute("href")||"").toLowerCase()===path);
+      });
+    }
+
+    // hamburger behavior
+    const menuBtn = document.getElementById("menuBtn");
+    const navPanel = document.getElementById("navPanel");
+    const overlay  = document.getElementById("overlay");
+
+    function openMenu(){
+      menuBtn.setAttribute("aria-expanded","true");
+      navPanel.style.display = "block";
+      overlay.classList.add("show");
+    }
+    function closeMenu(){
+      menuBtn.setAttribute("aria-expanded","false");
+      navPanel.style.display = "none";
+      overlay.classList.remove("show");
+    }
+    function toggleMenu(){
+      const expanded = menuBtn.getAttribute("aria-expanded")==="true";
+      expanded ? closeMenu() : openMenu();
+    }
+
+    document.addEventListener("DOMContentLoaded", ()=>{
+      updateBadge();
+      setActiveNav();
+
+      // init menu hidden
+      navPanel.style.display = "none";
+
+      menuBtn.addEventListener("click", (e)=>{
+        e.stopPropagation();
+        toggleMenu();
+      });
+
+      // klik overlay buat tutup
+      overlay.addEventListener("click", closeMenu);
+
+      // klik link menu -> tutup
+      navPanel.querySelectorAll("a").forEach(a=>{
+        a.addEventListener("click", closeMenu);
+      });
+
+      // ESC untuk tutup
+      document.addEventListener("keydown", (e)=>{
+        if(e.key === "Escape") closeMenu();
+      });
+
+      // klik di luar panel juga nutup (cadangan)
+      document.addEventListener("click", (e)=>{
+        if(menuBtn.getAttribute("aria-expanded") !== "true") return;
+        const clickedInside = navPanel.contains(e.target) || menuBtn.contains(e.target);
+        if(!clickedInside) closeMenu();
+      });
+    });
+  </script>
+</body>
+</html>

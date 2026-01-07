@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GOWES SHOP - Etalase</title>
+
+  <style>
+    :root{
+      --radius:18px;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --muted:rgba(255,255,255,.75);
+    }
+
+    * { box-sizing: border-box; }
+    html,body{height:100%}
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      min-height: 100vh;
+      color: #fff;
+
+      background:
+        linear-gradient(120deg,
+          rgba(5,10,24,0.92),
+          rgba(5,10,24,0.70) 45%,
+          rgba(5,10,24,0.92)
+        ),
+        url("/assets/images/bg-sepeda.jpg") center / cover no-repeat fixed;
+
+      background-color: #050a18;
+      overflow-x:hidden;
+    }
+
+    .page{min-height:100vh;padding:18px}
+
+    .topbar{
+      max-width:1120px;margin:0 auto;padding:12px 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(9,14,30,.60);
+      backdrop-filter:blur(12px);
+      border-radius:22px;
+      display:flex;justify-content:space-between;align-items:center;gap:12px
+    }
+
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{
+      width:34px;height:34px;display:grid;place-items:center;
+      border-radius:12px;background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14)
+    }
+    .brand h1{margin:0;font-size:22px;font-weight:800}
+    .brand p{margin:4px 0 0;font-size:12px;color:rgba(255,255,255,.6)}
+
+    .actions{display:flex;gap:10px;align-items:center}
+    .pill,.btn{
+      padding:9px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.08);
+      font-size:13px;color:#fff;text-decoration:none
+    }
+    .btn:hover{background:rgba(255,255,255,.14)}
+
+    .nav{
+      max-width:1120px;margin:12px auto 0;
+      display:flex;gap:8px;flex-wrap:wrap;padding:0 6px
+    }
+    .nav a{
+      color:rgba(255,255,255,.72);
+      padding:8px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      font-size:13px;text-decoration:none
+    }
+    .nav a.active{
+      background:rgba(92,132,255,.20);
+      border-color:rgba(92,132,255,.35);
+      color:#fff
+    }
+
+    .container{max-width:1120px;margin:16px auto 0;padding:0 6px}
+
+    .panel{
+      border-radius:18px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(10,18,36,.60);
+      backdrop-filter:blur(14px);
+      padding:22px
+    }
+    .panel h2{margin:0 0 6px;font-size:26px}
+    .panel p{margin:0 0 18px;font-size:14px;color:rgba(255,255,255,.75)}
+
+    .cards{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding-top:14px;
+      display:grid;grid-template-columns:repeat(3,1fr);gap:14px
+    }
+    .card{
+      border-radius:16px;border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+      padding:16px
+    }
+    .card h3{margin:0 0 6px;font-size:14px;font-weight:800}
+    .card p{margin:0 0 12px;font-size:12.8px;color:rgba(255,255,255,.6)}
+    .card .btn{display:inline-block}
+
+    footer{
+      max-width:1120px;margin:14px auto 0;
+      padding:0 10px;font-size:12px;color:rgba(255,255,255,.45)
+    }
+
+    @media(max-width:900px){
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .brand p{display:none}
+    }
+    @media(max-width:600px){
+      .cards{grid-template-columns:1fr}
+      body{background-attachment:scroll,scroll}
+    }
+
+    
+    .slider{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      background:rgba(13,26,58,.40);
+      margin-bottom:16px;
+    }
+
+    .slides{
+      display:flex;
+      transition:transform .5s ease;
+      will-change:transform;
+    }
+
+    .slide{
+      position:relative;                 
+      min-width:100%;
+      height:320px;
+      display:flex;
+      align-items:flex-end;
+      padding:18px;
+
+      background-size:contain;           
+      background-repeat:no-repeat;
+      background-position:center center;
+    }
+
+    .slide::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+
+    .slide-inner{
+      position:relative;
+      max-width:720px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(6,11,26,.65);
+      backdrop-filter:blur(10px);
+      padding:12px 14px;
+    }
+
+    .slide-inner h3{
+      margin:0 0 4px;
+      font-size:18px;
+      font-weight:800;
+    }
+
+    .slide-inner p{
+      margin:0;
+      font-size:13px;
+      color:rgba(255,255,255,.78);
+      line-height:1.45;
+    }
+
+    .slider-btn{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:42px;height:42px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      z-index:2;
+    }
+
+    .slider-btn:hover{background:rgba(0,0,0,.50)}
+    .slider-btn.prev{left:10px}
+    .slider-btn.next{right:10px}
+
+    .dots{
+      position:absolute;
+      left:50%;
+      bottom:10px;
+      transform:translateX(-50%);
+      display:flex;
+      gap:8px;
+      z-index:2;
+    }
+    .dot{
+      width:9px;height:9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.10);
+      cursor:pointer;
+    }
+    .dot.active{
+      background:rgba(110,168,255,.55);
+      border-color:rgba(110,168,255,.75);
+    }
+
+    @media (max-width:600px){
+      .slide{height:220px; padding:14px;}
+      .slide-inner h3{font-size:16px}
+    }
+  </style>
+</head>
+
+<body>
+<div class="page">
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">🚴‍♂️</div>
+    <div>
+      <h1>GOWES SHOP</h1>
+      <p>Sepeda & aksesoris pilihan untuk gowes nyaman</p>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="pill">Keranjang: <b>0</b></div>
+    <a class="btn" href="pembelian.html">Checkout</a>
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="index.html">Home</a>
+  <a class="active" href="Etalase.html">Etalase</a>
+  <a href="produk.html">Produk</a>
+  <a href="aksesoris.html">Aksesoris</a>
+  <a href="kupon.html">Kupon</a>
+  <a href="paylater.html">PayLater</a>
+  <a href="pembelian.html">Pembelian</a>
+  <a href="riwayat.html">Riwayat</a>
+  <a href="ulasan.html">Ulasan</a>
+  <a href="kontak.html">Kontak</a>
+</nav>
+
+<main class="container">
+
+  <!-- ===== SLIDER ETALASE ===== -->
+  <div class="slider">
+    <div class="slides" id="slides">
+      <div class="slide" style="background-image:url('/assets/images/slider/MTB.jpg')">
+        <div class="slide-inner">
+          <h3>MTB Terlaris</h3>
+          <p>Siap untuk jalur off-road dan tanjakan ekstrem</p>
+        </div>
+      </div>
+
+      <div class="slide" style="background-image:url('/assets/images/slider/road.jpeg')">
+        <div class="slide-inner">
+          <h3>Road Bike Aero</h3>
+          <p>Ringan, cepat, dan nyaman untuk jarak jauh</p>
+        </div>
+      </div>
+
+      <div class="slide" style="background-image:url('/assets/images/slider/helm-sepeda.jpeg')">
+        <div class="slide-inner">
+          <h3>Aksesoris Wajib</h3>
+          <p>Helm, lampu, dan perlengkapan safety untuk gowes aman</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="slider-btn prev" type="button" onclick="prevSlide()">‹</button>
+    <button class="slider-btn next" type="button" onclick="nextSlide()">›</button>
+
+    <div class="dots" id="dots"></div>
+  </div>
+
+  <!-- ===== PANEL + 3 CARD (INI TETAP ADA) ===== -->
+  <section class="panel">
+    <h2>Etalase</h2>
+    <p>
+      Halaman <b>Etalase</b> menampilkan pilihan produk unggulan, kategori utama,
+      dan akses cepat ke sepeda serta aksesoris terbaik di GOWES SHOP.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>🚲 Sepeda Unggulan</h3>
+        <p>Koleksi sepeda pilihan untuk harian, touring, hingga off-road.</p>
+        <a class="btn" href="produk.html">Lihat Sepeda</a>
+      </div>
+
+      <div class="card">
+        <h3>🧢 Aksesoris Wajib</h3>
+        <p>Helm, lampu, sarung tangan, dan perlengkapan safety.</p>
+        <a class="btn" href="aksesoris.html">Buka Aksesoris</a>
+      </div>
+
+      <div class="card">
+        <h3>🔥 Promo & Kupon</h3>
+        <p>Manfaatkan promo dan potongan harga yang sedang aktif.</p>
+        <a class="btn" href="kupon.html">Cek Promo</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Gowes Shop • Ride Safe, Ride Happy</footer>
+
+</div>
+
+<script>
+  
+  let sliderIndex = 0;
+  let sliderTimer = null;
+
+  function initSlider(){
+    const slidesEl = document.getElementById("slides");
+    if(!slidesEl) return;
+
+    const total = slidesEl.children.length;
+    if(total <= 1) return;
+
+    const dotsEl = document.getElementById("dots");
+    if(dotsEl){
+      dotsEl.innerHTML = Array.from({length: total}, (_, i) =>
+        `<button class="dot ${i===0 ? "active" : ""}" type="button" aria-label="Slide ${i+1}" data-dot="${i}"></button>`
+      ).join("");
+
+      dotsEl.querySelectorAll("[data-dot]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          sliderIndex = Number(btn.getAttribute("data-dot"));
+          showSlide();
+          resetAutoSlide();
+        });
+      });
+    }
+
+    showSlide();
+    startAutoSlide();
+  }
+
+  function showSlide(){
+    const slidesEl = document.getElementById("slides");
+    if(!slidesEl) return;
+
+    const total = slidesEl.children.length;
+    sliderIndex = (sliderIndex + total) % total;
+
+    slidesEl.style.transform = `translateX(-${sliderIndex * 100}%)`;
+
+    const dotsEl = document.getElementById("dots");
+    if(dotsEl){
+      dotsEl.querySelectorAll(".dot").forEach((d,i)=>{
+        d.classList.toggle("active", i === sliderIndex);
+      });
+    }
+  }
+
+  function nextSlide(){
+    sliderIndex += 1;
+    showSlide();
+    resetAutoSlide();
+  }
+
+  function prevSlide(){
+    sliderIndex -= 1;
+    showSlide();
+    resetAutoSlide();
+  }
+
+  function startAutoSlide(){
+    stopAutoSlide();
+    sliderTimer = setInterval(()=>{
+      sliderIndex += 1;
+      showSlide();
+    }, 5000);
+  }
+
+  function stopAutoSlide(){
+    if(sliderTimer){
+      clearInterval(sliderTimer);
+      sliderTimer = null;
+    }
+  }
+
+  function resetAutoSlide(){
+    startAutoSlide();
+  }
+
+  document.addEventListener("DOMContentLoaded", initSlider);
+</script>
+</body>
+</html>

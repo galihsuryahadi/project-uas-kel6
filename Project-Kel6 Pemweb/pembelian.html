@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GOWES SHOP - Pembelian</title>
+  <style>
+    :root{--bg:#060b1a;--bg2:#0b1430;--text:#eaf0ff;--muted:#b9c7ff;--line:rgba(255,255,255,.08);--shadow:0 12px 40px rgba(0,0,0,.35);--radius:14px}
+    *{box-sizing:border-box} html,body{height:100%}
+
+  
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);
+      background:
+        linear-gradient(120deg, rgba(5,10,24,0.92), rgba(5,10,24,0.70) 45%, rgba(5,10,24,0.92)),
+        url("/assets/images/bg-sepeda.jpg") center/cover no-repeat fixed;
+      background-color: var(--bg);
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,92%);margin:0 auto}
+    .header{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(6,11,26,.75);border-bottom:1px solid var(--line)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
+    .brand{display:flex;flex-direction:column;gap:2px}
+    .brand .title{font-size:26px;font-weight:800}
+    .brand .subtitle{font-size:13px;color:var(--muted)}
+    .badge{border:1px solid rgba(110,168,255,.45);background:rgba(110,168,255,.14);padding:7px 12px;border-radius:999px;font-size:13px;display:flex;gap:10px;align-items:center}
+    .badge button{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);padding:6px 10px;border-radius:999px;cursor:pointer;font-size:12px}
+
+    .nav{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:0 0 16px}
+    .nav a{font-size:13px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);transition:.2s}
+    .nav a:hover{border-color:rgba(110,168,255,.35);color:var(--text)}
+    .nav a.active{background:rgba(110,168,255,.18);border-color:rgba(110,168,255,.55);color:var(--text)}
+
+    .main{padding:26px 0 60px}
+    .card{background:rgba(13,26,58,.62);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+    .section{padding:18px}
+    .section-title{font-size:22px;font-weight:800;margin:0 0 12px}
+    .lead{color:var(--muted);margin:0 0 16px;line-height:1.6}
+    .hr{height:1px;background:var(--line);margin:16px 0}
+
+    .layout{display:grid;grid-template-columns:1.6fr .9fr;gap:14px}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}}
+
+    .list{display:flex;flex-direction:column;gap:10px}
+    .rowItem{
+      padding:14px;border:1px solid var(--line);border-radius:14px;
+      background:rgba(255,255,255,.03);
+      display:flex;justify-content:space-between;gap:12px;align-items:flex-start;
+    }
+    .rowItem h3{margin:0 0 4px;font-size:15px}
+    .meta{color:var(--muted);font-size:12px}
+    .price{font-weight:800;margin-top:6px}
+    .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .qtyBox{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--line);border-radius:999px;
+      padding:6px 10px;background:rgba(255,255,255,.03);
+      font-size:13px;color:var(--muted)
+    }
+    .iconBtn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:6px 10px;border-radius:10px;
+      cursor:pointer;font-size:12px
+    }
+    .iconBtn:hover{border-color:rgba(110,168,255,.35)}
+    .iconBtn.danger{border-color:rgba(255,255,255,.12);background:rgba(255,0,0,.08)}
+    .iconBtn.danger:hover{border-color:rgba(255,80,80,.45)}
+
+    .summaryBox{
+      padding:14px;border:1px solid var(--line);border-radius:14px;
+      background:rgba(255,255,255,.03)
+    }
+    .kv{display:grid;grid-template-columns:1fr auto;gap:10px 12px;color:var(--muted);font-size:13px}
+    .kv b{color:var(--text)}
+    .totalLine{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+    .stack{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      border-radius:10px;padding:10px 14px;
+      border:1px solid rgba(110,168,255,.40);
+      background:rgba(110,168,255,.12);
+      color:var(--text);cursor:pointer;font-weight:700;font-size:13px;
+      width:100%;
+    }
+    .btn.secondary{
+      background:rgba(255,255,255,.06);
+      border-color:var(--line);
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    .couponBox{display:flex;gap:8px;align-items:center;margin-top:10px}
+    .couponBox input{
+      flex:1;border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;border-radius:12px;outline:none;font-size:13px;
+      text-transform:uppercase;
+    }
+    .couponBox input:focus{border-color:rgba(110,168,255,.45)}
+    .hint{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+    .empty{
+      padding:18px;border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;color:var(--muted);
+      background:rgba(255,255,255,.02)
+    }
+
+    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+      padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.10);
+      background:rgba(10,16,40,.9);color:#eaf0ff;z-index:9999;font-size:13px}
+    .footer{border-top:1px solid var(--line);padding:18px 0;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="title">🚴‍♂️ GOWES SHOP</div>
+        <div class="subtitle">Checkout & ringkasan belanja kamu</div>
+      </div>
+      <div class="badge">
+        <span id="cartBadge">Keranjang: 0</span>
+        <button onclick="location.href='pembelian.html'">Checkout</button>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="Etalase.html">Etalase</a>
+      <a href="produk.html">Produk</a>
+      <a href="aksesoris.html">Aksesoris</a>
+      <a href="kupon.html">Kupon</a>
+      <a href="paylater.html">PayLater</a>
+      <a href="pembelian.html" class="active">Pembelian</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="ulasan.html">Ulasan</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    <section class="card section">
+      <h1 class="section-title">Pembelian</h1>
+      <p class="lead">Periksa item di keranjang, jumlah, ongkir, dan total sebelum lanjut ke PayLater atau buat pesanan.</p>
+      <div class="hr"></div>
+
+      <div class="layout">
+        <div>
+          <div class="list" id="cartList"></div>
+          <div id="emptyState" class="empty" style="display:none;margin-top:10px">
+            Keranjang kamu masih kosong. Tambah produk/aksesoris dulu ya.
+          </div>
+        </div>
+
+        <aside class="summaryBox">
+          <div class="kv" id="summaryKV"></div>
+
+          <div class="couponBox">
+            <input id="couponInput" placeholder="Masukkan kupon (GOWES10/HELM15/ONGKIR5)" />
+            <button class="btn secondary" id="btnApplyCoupon" style="width:auto;padding:10px 12px">Terapkan</button>
+          </div>
+          <div class="hint">
+            Kupon berlaku sesuai aturan: <b>GOWES10</b> diskon subtotal, <b>HELM15</b> khusus item kategori Helm, <b>ONGKIR5</b> diskon ongkir.
+          </div>
+
+          <div class="stack">
+            <button class="btn" id="btnPaylater">Cek PayLater</button>
+            <button class="btn" id="btnOrder">Buat Pesanan</button>
+            <button class="btn secondary" id="btnClear">Kosongkan Keranjang</button>
+            <a class="btn secondary" href="produk.html" style="text-align:center">Tambah Produk</a>
+            <a class="btn secondary" href="aksesoris.html" style="text-align:center">Tambah Aksesoris</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="footer">© 2026 Gowes Shop</div>
+  </div>
+</main>
+
+<script>
+  const LS_CART="toko_sepeda_cart";
+  const LS_COUPON="toko_sepeda_coupon";
+  const LS_ORDERS="toko_sepeda_orders";
+  const ONGKIR_DEFAULT = 25000;
+
+  function rupiah(n){return "Rp " + (n||0).toLocaleString("id-ID")}
+  function getCart(){try{return JSON.parse(localStorage.getItem(LS_CART))||[]}catch{return[]}}
+  function setCart(cart){localStorage.setItem(LS_CART, JSON.stringify(cart))}
+  function cartCount(){return getCart().reduce((a,x)=>a+(x.qty||0),0)}
+  function updateBadge(){const el=document.getElementById("cartBadge"); if(el) el.textContent="Keranjang: "+cartCount();}
+
+  function getOrders(){ try{return JSON.parse(localStorage.getItem(LS_ORDERS))||[]}catch{return[]} }
+  function setOrders(orders){ localStorage.setItem(LS_ORDERS, JSON.stringify(orders)); }
+
+  function toast(msg){
+    const t=document.createElement("div");
+    t.className="toast"; t.textContent=msg;
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),1500);
+  }
+
+  function getCoupon(){return (localStorage.getItem(LS_COUPON)||"").trim().toUpperCase()}
+  function setCoupon(code){localStorage.setItem(LS_COUPON,(code||"").trim().toUpperCase());}
+
+  function subtotal(){return getCart().reduce((a,x)=>a + ((x.price||0)*(x.qty||0)), 0);}
+  function helmSubtotal(){
+    return getCart().filter(x => (String(x.category||"").toLowerCase() === "helm"))
+      .reduce((a,x)=>a + ((x.price||0)*(x.qty||0)), 0);
+  }
+  function diskonProduk(code){
+    if(code==="GOWES10") return Math.round(subtotal() * 0.10);
+    if(code==="HELM15")  return Math.round(helmSubtotal() * 0.15);
+    return 0;
+  }
+  function diskonOngkir(code, ongkir){
+    if(code==="ONGKIR5") return Math.round((ongkir||0) * 0.05);
+    return 0;
+  }
+  function totalWithOngkir(){
+    const code=getCoupon();
+    const sub=subtotal();
+    const ongkir=ONGKIR_DEFAULT;
+    const discProd=diskonProduk(code);
+    const discShip=diskonOngkir(code, ongkir);
+    const total = Math.max(0, (sub - discProd) + (ongkir - discShip));
+    return { code, sub, ongkir, discProd, discShip, total };
+  }
+
+  function changeQty(id, delta){
+    const cart=getCart();
+    const idx=cart.findIndex(x=>x.id===id);
+    if(idx<0) return;
+    cart[idx].qty = (cart[idx].qty||0) + delta;
+    if(cart[idx].qty<=0) cart.splice(idx,1);
+    setCart(cart);
+    render();
+  }
+  function removeItem(id){
+    setCart(getCart().filter(x=>x.id!==id));
+    render();
+  }
+  function clearCart(silent=false){
+    setCart([]);
+    render();
+    if(!silent) toast("Keranjang dikosongkan");
+  }
+
+  function render(){
+    updateBadge();
+
+    const cart=getCart();
+    const list=document.getElementById("cartList");
+    const empty=document.getElementById("emptyState");
+
+    if(!cart.length){
+      list.innerHTML="";
+      empty.style.display="block";
+    }else{
+      empty.style.display="none";
+      list.innerHTML = cart.map(it=>`
+        <div class="rowItem">
+          <div>
+            <h3>${it.name || "Item"}</h3>
+            <div class="meta">${it.category ? it.category : "Kategori"} • ${it.id || "-"}</div>
+            <div class="price">${rupiah((it.price||0) * (it.qty||0))}</div>
+          </div>
+          <div class="controls">
+            <div class="qtyBox">
+              <button class="iconBtn" data-minus="${it.id}">-</button>
+              <b style="color:var(--text)">${it.qty||0}</b>
+              <button class="iconBtn" data-plus="${it.id}">+</button>
+            </div>
+            <button class="iconBtn danger" data-del="${it.id}">Hapus</button>
+          </div>
+        </div>
+      `).join("");
+
+      list.querySelectorAll("[data-minus]").forEach(b=>b.addEventListener("click", ()=>changeQty(b.getAttribute("data-minus"), -1)));
+      list.querySelectorAll("[data-plus]").forEach(b=>b.addEventListener("click", ()=>changeQty(b.getAttribute("data-plus"), +1)));
+      list.querySelectorAll("[data-del]").forEach(b=>b.addEventListener("click", ()=>removeItem(b.getAttribute("data-del"))));
+    }
+
+    const calc=totalWithOngkir();
+    document.getElementById("summaryKV").innerHTML = `
+      <div>Item di Keranjang</div><div><b>${cartCount()}</b></div>
+      <div>Subtotal</div><div><b>${rupiah(calc.sub)}</b></div>
+      <div>Ongkir (Simulasi)</div><div><b>${rupiah(calc.ongkir)}</b></div>
+      <div>Kupon Aktif</div><div><b>${calc.code || "-"}</b></div>
+      <div>Diskon Produk</div><div><b>${rupiah(calc.discProd)}</b></div>
+      <div>Diskon Ongkir</div><div><b>${rupiah(calc.discShip)}</b></div>
+      <div class="totalLine">Total</div><div class="totalLine"><b>${rupiah(calc.total)}</b></div>
+    `;
+
+    const btnPaylater=document.getElementById("btnPaylater");
+    const btnOrder=document.getElementById("btnOrder");
+    const disabled = !cart.length;
+    [btnPaylater, btnOrder].forEach(btn=>{
+      btn.disabled = disabled;
+      btn.style.opacity = disabled ? ".55" : "1";
+      btn.style.cursor = disabled ? "not-allowed" : "pointer";
+      btn.style.pointerEvents = disabled ? "none" : "auto";
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    render();
+    document.getElementById("couponInput").value = getCoupon();
+
+    document.getElementById("btnApplyCoupon").addEventListener("click", ()=>{
+      const val=document.getElementById("couponInput").value.trim().toUpperCase();
+      if(!val){ setCoupon(""); toast("Kupon dihapus"); render(); return; }
+      if(!["GOWES10","HELM15","ONGKIR5"].includes(val)){ toast("Kupon tidak valid"); return; }
+      setCoupon(val); toast("Kupon aktif: "+val); render();
+    });
+
+    document.getElementById("btnClear").addEventListener("click", ()=>clearCart(false));
+
+    document.getElementById("btnPaylater").addEventListener("click", (e)=>{
+      e.preventDefault(); e.stopPropagation();
+      if(!getCart().length){ toast("Keranjang masih kosong"); return; }
+      localStorage.setItem("toko_sepeda_checkout", JSON.stringify(totalWithOngkir()));
+      location.href="paylater.html";
+    });
+
+    document.getElementById("btnOrder").addEventListener("click", ()=>{
+      const cart = getCart();
+      if(!cart.length){ toast("Keranjang masih kosong"); return; }
+      const calc = totalWithOngkir();
+      const order = {
+        id: "ORD-" + Date.now(),
+        createdAt: new Date().toISOString(),
+        paymentMethod: "TUNAI",
+        coupon: calc.code || "",
+        subtotal: calc.sub,
+        ongkir: calc.ongkir,
+        diskonProduk: calc.discProd,
+        diskonOngkir: calc.discShip,
+        total: calc.total,
+        items: cart
+      };
+      const orders = getOrders();
+      orders.push(order);
+      setOrders(orders);
+
+      clearCart(true);
+      toast("Pesanan berhasil dibuat! (Non-PayLater)");
+    });
+  });
+</script>
+
+</body>
+</html>

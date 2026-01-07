@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GOWES SHOP - Kontak</title>
+  <style>
+    :root{--bg:#060b1a;--bg2:#0b1430;--text:#eaf0ff;--muted:#b9c7ff;--line:rgba(255,255,255,.08);--shadow:0 12px 40px rgba(0,0,0,.35);--radius:14px}
+    *{box-sizing:border-box} html,body{height:100%}
+
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);
+      background:
+        linear-gradient(120deg, rgba(5,10,24,0.92), rgba(5,10,24,0.70) 45%, rgba(5,10,24,0.92)),
+        url("/assets/images/bg-sepeda.jpg") center/cover no-repeat fixed;
+      background-color: var(--bg);
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,92%);margin:0 auto}
+    .header{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(6,11,26,.75);border-bottom:1px solid var(--line)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
+    .brand{display:flex;flex-direction:column;gap:2px}
+    .brand .title{font-size:26px;font-weight:800}
+    .brand .subtitle{font-size:13px;color:var(--muted)}
+    .badge{border:1px solid rgba(110,168,255,.45);background:rgba(110,168,255,.14);padding:7px 12px;border-radius:999px;font-size:13px;display:flex;gap:10px;align-items:center}
+    .badge button{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);padding:6px 10px;border-radius:999px;cursor:pointer;font-size:12px}
+
+    .nav{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:0 0 16px}
+    .nav a{font-size:13px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);transition:.2s}
+    .nav a:hover{border-color:rgba(110,168,255,.35);color:var(--text)}
+    .nav a.active{background:rgba(110,168,255,.18);border-color:rgba(110,168,255,.55);color:var(--text)}
+
+    .main{padding:26px 0 60px}
+    .card{background:rgba(13,26,58,.62);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .section{padding:18px}
+    .section-title{font-size:22px;font-weight:800;margin:0 0 12px}
+    .lead{color:var(--muted);margin:0 0 16px;line-height:1.6}
+    .hr{height:1px;background:var(--line);margin:16px 0}
+
+    .layout{display:grid;grid-template-columns:1.05fr 1.2fr;gap:14px}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}}
+
+    .box{padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+    .kv{display:grid;grid-template-columns:110px 1fr;gap:10px 12px;color:var(--muted);font-size:13px}
+    .kv b{color:var(--text)}
+    .tip{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6}
+
+    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:12px}
+    input,textarea{
+      width:100%;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      outline:none;
+      font-size:13px;
+    }
+    textarea{min-height:130px;resize:vertical}
+    input:focus,textarea:focus{border-color:rgba(110,168,255,.45)}
+
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:10px 14px;border:1px solid rgba(110,168,255,.40);background:rgba(110,168,255,.12);color:var(--text);cursor:pointer;font-weight:700;font-size:13px}
+    .btn.secondary{background:rgba(255,255,255,.06);border-color:var(--line);color:var(--muted);font-weight:600}
+
+    .small{font-size:12px;color:var(--muted);margin-top:8px}
+    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(10,16,40,.9);color:#eaf0ff;z-index:9999;font-size:13px}
+    .footer{border-top:1px solid var(--line);padding:18px 0;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="title">🚴‍♂️ GOWES SHOP</div>
+        <div class="subtitle">Hubungi kami untuk konsultasi sepeda & aksesoris</div>
+      </div>
+      <div class="badge">
+        <span id="cartBadge">Keranjang: 0</span>
+        <button onclick="location.href='pembelian.html'">Checkout</button>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="Etalase.html">Etalase</a>
+      <a href="produk.html">Produk</a>
+      <a href="aksesoris.html">Aksesoris</a>
+      <a href="kupon.html">Kupon</a>
+      <a href="paylater.html">PayLater</a>
+      <a href="pembelian.html">Pembelian</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="ulasan.html">Ulasan</a>
+      <a href="kontak.html" class="active">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    <section class="card section">
+      <h1 class="section-title">Kontak</h1>
+      <p class="lead">
+        Kalau kamu butuh rekomendasi sepeda, ukuran frame, atau aksesoris yang cocok,
+        silakan kirim pesan lewat form. <b>(Simulasi: pesan tidak benar-benar dikirim ke server.)</b>
+      </p>
+
+      <div class="hr"></div>
+
+      <div class="layout">
+        <div class="box">
+          <div class="kv">
+            <div>Alamat</div><div><b>Jl. Gowes Sejahtera No. 12</b></div>
+            <div>WhatsApp</div><div><b>08xx-xxxx-xxxx</b></div>
+            <div>Email</div><div><b>tokosepeda@example.com</b></div>
+            <div>Jam Buka</div><div><b>10.00 - 20.00</b></div>
+          </div>
+          <div class="tip">
+            <b>Tips:</b> Cantumkan kebutuhanmu (harian/olah raga/touring),
+            tinggi badan, dan budget supaya rekomendasi lebih pas.
+          </div>
+        </div>
+
+        <div class="box">
+          <form id="contactForm">
+            <label for="name">Nama</label>
+            <input id="name" placeholder="Nama kamu" required />
+
+            <label for="contact">Email / No. HP</label>
+            <input id="contact" placeholder="Contoh: email@domain.com / 08xx..." required />
+
+            <label for="msg">Pesan</label>
+            <textarea id="msg" placeholder="Tulis pesan kamu..." required></textarea>
+
+            <div class="row">
+              <button class="btn" type="submit">Kirim</button>
+              <button class="btn secondary" type="reset">Reset</button>
+            </div>
+
+            <div class="small">*Setelah kamu klik Kirim, akan muncul notifikasi sukses (simulasi).</div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">© 2026 Gowes Shop</div>
+  </div>
+</main>
+
+<script>
+  const LS_CART="toko_sepeda_cart";
+  function getCart(){try{return JSON.parse(localStorage.getItem(LS_CART))||[]}catch{return[]}}
+  function cartCount(){return getCart().reduce((a,x)=>a+(x.qty||0),0)}
+  function updateBadge(){const el=document.getElementById("cartBadge"); if(el) el.textContent="Keranjang: "+cartCount();}
+  function toast(msg){
+    const t=document.createElement("div");
+    t.className="toast"; t.textContent=msg;
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),1600);
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    updateBadge();
+    document.getElementById("contactForm").addEventListener("submit", (e)=>{
+      e.preventDefault();
+      toast("Pesan berhasil dikirim! (Simulasi)");
+      e.target.reset();
+    });
+  });
+</script>
+
+</body>
+</html>

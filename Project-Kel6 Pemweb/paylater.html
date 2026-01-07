@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GOWES SHOP - PayLater</title>
+  <style>
+    :root{--bg:#060b1a;--bg2:#0b1430;--text:#eaf0ff;--muted:#b9c7ff;--line:rgba(255,255,255,.08);--shadow:0 12px 40px rgba(0,0,0,.35);--radius:14px}
+    *{box-sizing:border-box} html,body{height:100%}
+
+    
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);
+      background:
+        linear-gradient(120deg, rgba(5,10,24,0.92), rgba(5,10,24,0.70) 45%, rgba(5,10,24,0.92)),
+        url("/assets/images/bg-sepeda.jpg") center/cover no-repeat fixed;
+      background-color: var(--bg);
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,92%);margin:0 auto}
+    .header{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(6,11,26,.75);border-bottom:1px solid var(--line)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
+    .brand{display:flex;flex-direction:column;gap:2px}
+    .brand .title{font-size:26px;font-weight:800}
+    .brand .subtitle{font-size:13px;color:var(--muted)}
+    .badge{border:1px solid rgba(110,168,255,.45);background:rgba(110,168,255,.14);padding:7px 12px;border-radius:999px;font-size:13px;display:flex;gap:10px;align-items:center}
+    .badge button{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);padding:6px 10px;border-radius:999px;cursor:pointer;font-size:12px}
+    .nav{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:0 0 16px}
+    .nav a{font-size:13px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);transition:.2s}
+    .nav a:hover{border-color:rgba(110,168,255,.35);color:var(--text)}
+    .nav a.active{background:rgba(110,168,255,.18);border-color:rgba(110,168,255,.55);color:var(--text)}
+    .main{padding:26px 0 60px}
+    .card{background:rgba(13,26,58,.62);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .section{padding:18px}
+    .section-title{font-size:22px;font-weight:800;margin:0 0 12px}
+    .lead{color:var(--muted);margin:0 0 16px;line-height:1.6}
+    .hr{height:1px;background:var(--line);margin:16px 0}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:10px 14px;border:1px solid rgba(110,168,255,.40);background:rgba(110,168,255,.12);color:var(--text);cursor:pointer;font-weight:600;font-size:13px}
+    .btn.secondary{background:rgba(255,255,255,.06);border-color:var(--line);color:var(--muted)}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .kv{display:grid;grid-template-columns:180px 1fr;gap:10px 12px;color:var(--muted);font-size:13px}
+    .kv b{color:var(--text)}
+    .small{font-size:12px;color:var(--muted)}
+    .empty{margin-top:10px;padding:14px;border:1px dashed rgba(255,255,255,.18);border-radius:14px;color:var(--muted);background:rgba(255,255,255,.02)}
+    .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(10,16,40,.9);color:#eaf0ff;z-index:9999;font-size:13px}
+    .footer{border-top:1px solid var(--line);padding:18px 0;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="title">🚴‍♂️ GOWES SHOP</div>
+        <div class="subtitle">PayLater • Hitung cicilan & checkout</div>
+      </div>
+      <div class="badge">
+        <span id="cartBadge">Keranjang: 0</span>
+        <button onclick="location.href='pembelian.html'">Checkout</button>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="Etalase.html">Etalase</a>
+      <a href="produk.html">Produk</a>
+      <a href="aksesoris.html">Aksesoris</a>
+      <a href="kupon.html">Kupon</a>
+      <a href="paylater.html">PayLater</a>
+      <a href="pembelian.html">Pembelian</a>
+      <a href="riwayat.html">Riwayat</a>
+      <a href="ulasan.html">Ulasan</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container">
+    <section class="card section">
+      <h1 class="section-title">PayLater</h1>
+      <p class="lead">
+        Pilih tenor, lihat cicilan, lalu klik <b>Bayar dengan PayLater</b> untuk membuat pesanan.
+      </p>
+
+      <div class="hr"></div>
+
+      <div class="kv" id="paylaterKV"></div>
+      <div id="emptyState" class="empty" style="display:none">
+        Keranjang kamu masih kosong. Silakan tambah produk dulu ya.
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="row">
+        <select id="tenorSelect" class="btn secondary" style="width:auto">
+          <option value="3">Tenor 3 bulan</option>
+          <option value="6">Tenor 6 bulan</option>
+          <option value="12">Tenor 12 bulan</option>
+        </select>
+
+        <button class="btn" id="btnPaylaterCheckout">Bayar dengan PayLater</button>
+
+        <a class="btn secondary" href="pembelian.html">Kembali</a>
+        <a class="btn secondary" href="produk.html">Tambah Produk</a>
+        <a class="btn secondary" href="aksesoris.html">Tambah Aksesoris</a>
+      </div>
+
+      <p class="small" style="margin-top:12px">
+        *Catatan: bunga contoh <b>2%/bulan</b>. Nominal cicilan bisa berbeda pada layanan asli.
+      </p>
+    </section>
+
+    <div class="footer">© 2026 Gowes Shop</div>
+  </div>
+</main>
+
+<script>
+  const LS_CART="toko_sepeda_cart";
+  const LS_COUPON="toko_sepeda_coupon";
+  const LS_ORDERS="toko_sepeda_orders";
+  const ONGKIR_DEFAULT = 25000;
+
+  function getCart(){try{return JSON.parse(localStorage.getItem(LS_CART))||[]}catch{return[]}}
+  function setCart(cart){localStorage.setItem(LS_CART, JSON.stringify(cart))}
+  function cartCount(){return getCart().reduce((a,x)=>a+(x.qty||0),0)}
+  function updateBadge(){const el=document.getElementById("cartBadge"); if(el) el.textContent="Keranjang: "+cartCount();}
+  function rupiah(n){return "Rp " + (n||0).toLocaleString("id-ID")}
+  function getCoupon(){return (localStorage.getItem(LS_COUPON)||"").trim().toUpperCase()}
+
+  function getOrders(){try{return JSON.parse(localStorage.getItem(LS_ORDERS))||[]}catch{return[]}}
+  function setOrders(orders){localStorage.setItem(LS_ORDERS, JSON.stringify(orders))}
+
+  function subtotal(){
+    return getCart().reduce((a,x)=>a + ((x.price||0)*(x.qty||0)), 0);
+  }
+  function helmSubtotal(){
+    return getCart()
+      .filter(x => (String(x.category||"").toLowerCase() === "helm"))
+      .reduce((a,x)=>a + ((x.price||0)*(x.qty||0)), 0);
+  }
+  function diskonProduk(code){
+    if(code==="GOWES10") return Math.round(subtotal() * 0.10);
+    if(code==="HELM15")  return Math.round(helmSubtotal() * 0.15);
+    return 0;
+  }
+  function diskonOngkir(code, ongkir){
+    if(code==="ONGKIR5") return Math.round((ongkir||0) * 0.05);
+    return 0;
+  }
+
+  function totalWithOngkir(){
+    const code=getCoupon();
+    const sub=subtotal();
+    const ongkir=ONGKIR_DEFAULT;
+    const discProd=diskonProduk(code);
+    const discShip=diskonOngkir(code, ongkir);
+    const total = Math.max(0, (sub - discProd) + (ongkir - discShip));
+    return { code, sub, ongkir, discProd, discShip, total };
+  }
+
+  function setActiveNav(){
+    const path=(location.pathname.split("/").pop()||"paylater.html").toLowerCase();
+    document.querySelectorAll(".nav a").forEach(a=>{
+      a.classList.toggle("active",(a.getAttribute("href")||"").toLowerCase()===path);
+    });
+  }
+
+  function toast(msg){
+    const t=document.createElement("div");
+    t.className="toast"; t.textContent=msg;
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),1600);
+  }
+
+  function calcCicilan(totalFinal, tenor){
+    const bunga = 0.02;
+    return Math.round((totalFinal * (1 + bunga*tenor)) / tenor);
+  }
+
+  function renderPaylater(){
+    updateBadge();
+
+    const cart = getCart();
+    const kv = document.getElementById("paylaterKV");
+    const empty = document.getElementById("emptyState");
+    const btn = document.getElementById("btnPaylaterCheckout");
+
+    if(!cart.length){
+      kv.innerHTML = "";
+      empty.style.display = "block";
+      btn.disabled = true;
+      btn.style.opacity = ".55";
+      btn.style.cursor = "not-allowed";
+      toast("Keranjang masih kosong");
+      return;
+    }
+
+    empty.style.display = "none";
+    btn.disabled = false;
+    btn.style.opacity = "1";
+    btn.style.cursor = "pointer";
+
+    const calc = totalWithOngkir();
+    const t = calc.total;
+
+    kv.innerHTML = `
+      <div>Total Keranjang</div><div><b>${rupiah(t)}</b></div>
+      <div>Subtotal</div><div><b>${rupiah(calc.sub)}</b></div>
+      <div>Ongkir (Simulasi)</div><div><b>${rupiah(calc.ongkir)}</b></div>
+      <div>Kupon Aktif</div><div><b>${calc.code || "-"}</b></div>
+      <div>Diskon Produk</div><div><b>${rupiah(calc.discProd)}</b></div>
+      <div>Diskon Ongkir</div><div><b>${rupiah(calc.discShip)}</b></div>
+      <div>Cicilan 3 bulan</div><div><b>${rupiah(calcCicilan(t,3))}/bulan</b></div>
+      <div>Cicilan 6 bulan</div><div><b>${rupiah(calcCicilan(t,6))}/bulan</b></div>
+      <div>Cicilan 12 bulan</div><div><b>${rupiah(calcCicilan(t,12))}/bulan</b></div>
+    `;
+  }
+
+  function checkoutPaylater(tenor){
+    const cart = getCart();
+    if(!cart.length){ toast("Keranjang masih kosong"); return; }
+
+    const calc = totalWithOngkir();
+    const totalFinal = calc.total;
+    const cicilan = calcCicilan(totalFinal, tenor);
+
+    const order = {
+      id: "ORD-" + Date.now(),
+      createdAt: new Date().toISOString(),
+      paymentMethod: "PAYLATER",
+      tenor: tenor,
+      cicilanPerBulan: cicilan,
+      subtotal: calc.sub,
+      ongkir: calc.ongkir,
+      diskonProduk: calc.discProd,
+      diskonOngkir: calc.discShip,
+      coupon: calc.code || "",
+      total: totalFinal,
+      items: cart
+    };
+
+    const orders = getOrders();
+    orders.push(order);
+    setOrders(orders);
+
+    setCart([]);
+    renderPaylater();
+    toast("Berhasil! Pesanan PayLater dibuat.");
+    setTimeout(()=>location.href="pembelian.html", 1200);
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    setActiveNav();
+    renderPaylater();
+
+    document.getElementById("btnPaylaterCheckout").addEventListener("click", (e)=>{
+      e.preventDefault();
+      const tenor = parseInt(document.getElementById("tenorSelect").value, 10);
+      checkoutPaylater(tenor);
+    });
+  });
+</script>
+</body>
+</html>
